@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     Disposable subscribe2;
 
     private void initOnClick() {
-        Bean bean = new Bean("yiranchunqiu", "123456", "123456");
+        Bean bean = new Bean("yiranchunqiu", "123456");
         tvPost.setOnClickListener(v -> {
             subscribe1 = App.getInstance().httpUtil1.createService(AppApi.class)
                     .login(bean)

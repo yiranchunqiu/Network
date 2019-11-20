@@ -30,6 +30,6 @@ public interface AppApi {
                                      @Query("sign") String sign,
                                      @Query("isGlobal") String isGlobal,
                                      @Query("locale") String locale);
-    @POST("/user/register")
+    @POST("/user/login")
     Observable<Object> login(@Body Bean bean);
 }

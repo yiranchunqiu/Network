@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                            o -> Log.d("测试", o.toString()),
-                            throwable -> Log.d("测试", throwable.toString())
+                            o -> Log.d("测试1", o.toString()),
+                            throwable -> Log.d("测试2", throwable.toString())
                     );
         });
         tvGet.setOnClickListener(v -> {
@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                            o -> Log.d("测试", o.toString()),
-                            throwable -> Log.d("测试", throwable.toString())
+                            o -> Log.d("测试1", o.toString()),
+                            throwable -> Log.d("测试2", throwable.toString())
                     );
         });
     }

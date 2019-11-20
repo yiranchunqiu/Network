@@ -72,4 +72,5 @@ dependencies {
     debugImplementation   'com.squareup.leakcanary:leakcanary-android:2.0-beta-3'
     //network
     implementation project(':pxznetwork')
+//    implementation 'com.github.yiranchunqiu:Network:1.0'
 }

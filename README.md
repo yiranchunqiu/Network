@@ -1,5 +1,5 @@
 # 介绍
-## 自用项目，自定义标题栏
+## 自用项目，基于rxjava2.x+okhttp3.x+retrofit2.x封装的网络工具类
 
 ### 图片
 <div style="align: center">

@@ -34,42 +34,29 @@ public class CustomResponseBodyConverter<T> implements Converter<ResponseBody, T
     @Override
     public T convert(ResponseBody value) throws IOException {
         String responseText = value.string();
-        JsonObject jsonObject = null;
-        JsonArray jsonArray = null;
-        try {
-            // 如果data为null，会造成io.reactivex.exceptions.OnErrorNotImplementedException:
-            // onNext called with null. Null values are generally not allowed in 2.x operators and sources.
-            jsonObject = new Gson().fromJson(responseText, JsonObject.class);
-            JsonElement jsonElement = jsonObject.get("data");
-            if (jsonElement == null || jsonElement instanceof JsonNull) {
-                jsonObject.add("data", new JsonObject());
-            }
-            responseText = jsonObject.toString();
-        } catch (Exception e) {
-            if (e instanceof JsonSyntaxException) {
-                jsonArray = new Gson().fromJson(responseText, JsonArray.class);
-                responseText = jsonArray.toString();
-                JsonReader jsonReader = gson.newJsonReader(new StringReader(responseText));
-                return adapter.read(jsonReader);
-            } else {
-                e.printStackTrace();
-            }
-        }
+        JsonObject jsonObject= new Gson().fromJson(responseText, JsonObject.class);
         int tryCount = 0;
         while (tryCount < 2) {
+            //如果没有报错直接返回，如果报错，处理一次数据重新循环
             JsonReader jsonReader = gson.newJsonReader(new StringReader(responseText));
             try {
                 return adapter.read(jsonReader);
             } catch (JsonSyntaxException e) {
                 if (e.getMessage().contains("Expected BEGIN_ARRAY")) {
-                    // 说明data需要[]数组格式的
+                    // 说明data需要[]格式的
                     jsonObject.add("data", new JsonArray());
                     responseText = jsonObject.toString();
                     tryCount++;
                     continue;
-                } else if (e.getMessage().contains("IllegalStateException")) {
-                    //data为""转null
+                }else if (e.getMessage().contains("Expected a string")) {
+                    //说明data需要string格式
                     jsonObject.add("data", null);
+                    responseText = jsonObject.toString();
+                    tryCount++;
+                    continue;
+                }else if (e.getMessage().contains("Expected BEGIN_OBJECT")) {
+                    //说明data需要{}格式
+                    jsonObject.add("data", new JsonObject());
                     responseText = jsonObject.toString();
                     tryCount++;
                     continue;

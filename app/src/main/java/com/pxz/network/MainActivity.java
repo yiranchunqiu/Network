@@ -4,18 +4,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.pxz.pxznetwork.HttpUtil;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import androidx.appcompat.app.AppCompatActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * 类说明：首页

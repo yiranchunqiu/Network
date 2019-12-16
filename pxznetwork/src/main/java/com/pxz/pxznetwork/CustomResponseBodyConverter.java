@@ -2,8 +2,6 @@ package com.pxz.pxznetwork;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.TypeAdapter;
@@ -36,7 +34,7 @@ public class CustomResponseBodyConverter<T> implements Converter<ResponseBody, T
         String responseText = value.string();
         JsonObject jsonObject= new Gson().fromJson(responseText, JsonObject.class);
         int tryCount = 0;
-        while (tryCount < 2) {
+        while (tryCount < 3) {
             //如果没有报错直接返回，如果报错，处理一次数据重新循环
             JsonReader jsonReader = gson.newJsonReader(new StringReader(responseText));
             try {

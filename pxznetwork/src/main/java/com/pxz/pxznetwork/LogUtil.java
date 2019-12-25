@@ -226,13 +226,13 @@ public class LogUtil {
             index += segmentSize;
             switch (type) {
                 case LOG_D:
-                    Log.i(tag, logContent.trim());
-                    break;
-                case LOG_I:
                     Log.d(tag, logContent.trim());
                     break;
+                case LOG_I:
+                    Log.i(tag, logContent.trim());
+                    break;
                 case LOG_E:
-                    Log.w(tag, logContent.trim());
+                    Log.e(tag, logContent.trim());
                     break;
                 default:
                     break;
